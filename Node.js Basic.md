@@ -112,7 +112,61 @@ console.log(a); // 이렇게 해야 a가 호출됨.
    
    ![node.js memory rs](C:\Users\HBY\Desktop\Java\4Nodejs\picture\node.js memory rs.PNG)
    
+   다른 code에 대해서 memory적으로의 그림은 다음과 같다고 생각한다(100% 확신 X)
    
+   globalExample1
+   
+   ```javascript
+   var a=10; //이 문서 f()의 local stack
+   b=20; //global member
+   this.c=30; //문서{} member
+   function d(){
+   var e=40;//d의 local stack
+   f=50; //global member
+   this.g=60; //global member
+   }
+   d();
+   console.log(global.g);//60
+   ```
+   
+   ![globalExample1](C:\Users\HBY\Desktop\Java\4Nodejs\picture\globalExample1.PNG)
+   
+   globalExample2
+   
+   ```javascript
+   var a=10; //이 문서 f()의 local stack
+   b=20; //global member
+   this.c=30; //문서{} member
+   var d=function (){
+   var e=40;//d의 local stack
+   f=50; //global member
+   this.g=60; //global member
+   }
+   d();
+   console.log(global.g);//60
+   ```
+   
+   ![globalExample2](C:\Users\HBY\Desktop\Java\4Nodejs\picture\globalExample2.PNG)
+   
+   globalExample3
+   
+   ```javascript
+   var a=10; //이 문서 f()의 local stack
+   b=20; //global member
+   this.c=30; //문서{} member
+   var d={
+     d2:function (){
+     var e=40;//d2의 local stack
+     f=50; //global member
+     this.g=60; //d member
+     }
+   }
+   d.d2();
+   console.log(d.g);//60
+   
+   ```
+   
+   ![globalExample3](C:\Users\HBY\Desktop\Java\4Nodejs\picture\globalExample3.PNG)
    
 2. array.forEach(function(value, index, array))
 
@@ -323,6 +377,54 @@ console.log(a); // 이렇게 해야 a가 호출됨.
    console.log(checkNumber(10));
    console.log(checkStringOddOrEven('hello'));
    console.log(checkStringOddOrEven('hello!'));
+   ```
+
+6. Web Application Server
+
+   실제로 돌아가는 서버를 만드는 code에 해당함. 
+
+   여기에서는 Global Object에 있던 다양한 module들을 사용함. 
+
+   Server Programming의 기본 Format
+
+   ```javascript
+   const http = require("http"); // module을 사용하기 위해 require 사용
+   const fs = require("fs");
+   
+   /* server 변수를 한번만 쓰니 아래의 방식과 같이 쓸 수 있다. 
+   const server = http.createServer((req, res) => {
+       res.writeHead(200, { 
+           "Content-Type": "text/html; charset=utf-8"
+       }); // charset = utf-8에서 띄어쓰기 하면 인식 X
+       res.write("<h1>안녕하세요 HBY</h1>");
+       res.end();
+   }); // createServer 인자에 callback 함수 지정
+   server.listen(9999, () => {
+       console.log("Server ready...........");
+   }); // 0 ~ 65535번 port까지 사용 가능함. 0 ~ 1024 port까지는 사용하지 말자!
+   */
+   
+   // createServer().listen()이라는 함수가 존재함.
+   // server가 시작되면 index.html file을 읽고 싶은 경우
+   
+   // createServer를 완료하면 (req, res)를 인자로 callback 함수 수행
+   http.createServer((req, res) => {
+       fs.readFile("./index.html", (err, data) => { 
+           // index.html을 읽고나면 callback 함수 수행
+           if(err) {
+               throw err;
+           } 
+           res.writeHead(200, { 
+               "Content-Type": "text/html; charset=utf-8"
+           });
+           res.end(data);
+       });
+   }).listen(9999, () => { 
+       console.log("Server ready...........");
+   });
+   
+   // server.listen port 9999로 지정하며, 해당 함수가 수행되면 console.log를 찍는다. 
+   // writeHead의 2번째 인자값을 JSON type으로 주는 것을 볼 수 있다. 
    ```
 
    

@@ -1,0 +1,19 @@
+const http = require("http");
+const fs = require("fs");
+const server = http.createServer((req, res) => {
+    fs.readFile("./band.html", (err, data) => {
+        if(err) {
+            throw err;
+        }
+        res.writeHead(200, {
+            "Content-Type": " text/html; charset=utf-8"
+        });
+        res.end(data);
+    });
+}); 
+
+server.listen(8888, () => {
+    console.log("Server ready");
+});
+
+// 요청이 들어오면 createServer의 callback 함수가 수행된다. 
