@@ -6,16 +6,21 @@ const {memUsagePer, freeSpacePer} = require("../../2global_test/os");
 // HTTP 진행순서 그림 보면서 되새기자
 
 const server = http.createServer((req, res) => {
-    console.log(req.url);
+    // console.log(req.url);
 
     if(req.url === "/") {
+        console.log(req.url, "OK");
         fs.readFile("./band.html", (err, data) => {
             if(err) {
                 throw err;
             }
-            res.end(data);
+            res.writeHead(200, {
+                "Content-Type": "text/html; charset=utf-8"
+            });
+            res.end(data); // flush 기능
         });
     } else if(req.url === "/simpleMe") {
+        console.log(req.url, "OK");
         fs.readFile("./simpleMe.html", (err, data) => {
             if(err) {
                 throw err;
@@ -31,6 +36,7 @@ const server = http.createServer((req, res) => {
             res.end(data);
         });
     } else if(req.url === "/video") {
+        console.log(req.url, "OK");
         fs.readFile("./video.mp4", (err, data) => {
             if(err) {
                 throw err;
@@ -41,14 +47,17 @@ const server = http.createServer((req, res) => {
             res.end(data);
         });
     } else if(req.url === "/video.html") {
-        fs.readFile("./video.mp4", (err, data) => {
+        console.log(req.url, "OK");
+        fs.readFile("./video2.html", (err, data) => {
             if(err) {
                 throw err;
             }
-            res.writeHead(200, 
-                {"Content-Type": "video/mp4"});
+            // res.writeHead(200, 
+            //     {"Content-Type": "video/mp4"});
             res.end(data);
         });
+    } else {
+        console.log(req.url, "Not Found");
     }
 });
 
