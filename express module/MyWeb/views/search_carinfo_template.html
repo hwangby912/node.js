@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="./css/stylesheet.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/stylesheet.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src = "js/handler2.js"></script>
+    <script>
+        function retBtn() { // 조회 버튼시 수행되는 함수
+            let btnGrpVal = document.getElementById("select_menu").value;
+            let btnGrpValNo = parseInt(btnGrpVal);
+            let carNumVal = document.getElementById("carNum").value;
+            let imgSrc = document.getElementById("img_div");
+            if(btnGrpValNo == 1) { // 조회타입
+                alert("Select others");
+            } else if(btnGrpValNo == 2 || btnGrpValNo == 3){ // 차량번호 || 차대번호
+                alert(carNumVal);
+                imgSrc.innerHTML = "<table border = 1 width = '1000px'>\
+                    <tr><th>제조사</th><th>자동차명</th><th>배기량</th><th>사용연료</th>\
+                    <th>연식</th><th>차체형상</th><th>용도 및 차종</th><th>최초 보험 가입일자</th></tr>\
+                    <tr><td>아우디</td><td>A5</td><td>2,972cc</td><td>가솔린</td>\
+                    <td>2019</td><td>4도어 세단</td><td>자가용</td><td>2019.01.01</td></tr>\
+                    </table>";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <span class="title_span">
+        <h1>자동차 일반 사양 정보 조회</h1>
+    </span>
+    <div class="container">
+        <div class="btn-group">
+            <div class="btn-group">
+                <select id = "select_menu">
+                    <option value = "1">조회타입</option>
+                    <option value = "2">차량번호</option>
+                    <option value = "3">차대번호</option>
+                </select>
+            </div>
+            <p>
+                <textarea id = "carNum" rows="1" cols="100" placeholder="차량(대)번호를 띄워쓰기 없이 입력하세요. 예)01가1234"></textarea>
+            </p>
+            <p>
+                <button type="button" class="btn btn-primary" data-toggle="dropdown" id = "search_btn">
+                    조회 <span class="caret"></span></button>
+            </p>
+            <div id = "img_div">
+                <img src = "img/car_info.PNG" width="500px" height="300px">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
