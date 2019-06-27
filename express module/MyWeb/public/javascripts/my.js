@@ -1,4 +1,5 @@
 $(document).ready(() => {
+    // member insert btn listener
     $('#member_insert_btn').click(() => {
         const name = $('#name').val();
         const email = $('#email').val();
@@ -10,10 +11,50 @@ $(document).ready(() => {
             comments
         };
         // $ === xhr 객체 (let xhr = new XMLHttpRequest의 jQuery ver)
-        $.post('/member_insert', send_params, (data, status) => {
-            // alert(data + " : " + status);
-            const parsedData = JSON.parse(data);
-            $('#result_div').html(`<h1>${parsedData.msg}</h1>`);
+        $.post('/member_insert', send_params, function (data, status) {
+            const parsed_data = JSON.parse(data);
+            $('#result_div').html(`<h1>${parsed_data.msg}</h1>`);
         });
-    })
+    });
+
+    // login btn listener
+    $('#login_btn').click(() => {
+        const email = $('#login_email').val();
+        const login_params = {
+            email
+        };
+
+        $.post('/login', login_params, (data, status) => {
+            try {
+                $('#login_email').val() = "";
+            } catch (err) {
+                location.reload(true);
+            }
+        });
+    });
+
+    // logout btn listener
+    $('#logout_btn').click(() => {
+        $.get('/logout', (data, status) => {
+            location.reload(true);
+        });
+    });
+
+    $('#search_btn').click(() => {
+        const carNum = $('#carNum').val();
+        const select_menu = $('#select_menu').val();
+        const send_params = {
+            carNum,
+            select_menu
+        };
+        $.post('/search_carinfo', send_params, (data, status) => {
+            const parsed_data = JSON.parse(data);
+            let tableTag = '<table border = 1>';
+            for (key in parsed_data.msg) {
+                tableTag += `<tr><td>${key}</td><td>${parsed_data.msg[key]}</td></tr>`;
+            }
+            tableTag += '</table>';
+            $('#carResult').html(`${tableTag}`);
+        });
+    });
 });

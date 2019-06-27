@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./css/stylesheet.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script src = "js/handler2.js"></script>
+    <script src = "javascripts/my.js"></script>
     <script>
         function retBtn() { // 조회 버튼시 수행되는 함수
             let btnGrpVal = document.getElementById("select_menu").value;
@@ -35,13 +35,13 @@
     <span class="title_span">
         <h1>자동차 일반 사양 정보 조회</h1>
     </span>
-    <div class="container">
+    <div class="container" id = "carResult">
         <div class="btn-group">
             <div class="btn-group">
                 <select id = "select_menu">
-                    <option value = "1">조회타입</option>
-                    <option value = "2">차량번호</option>
-                    <option value = "3">차대번호</option>
+                    <option>조회타입</option>
+                    <option value = "1">차량번호</option>
+                    <option value = "2">차대번호</option>
                 </select>
             </div>
             <p>
