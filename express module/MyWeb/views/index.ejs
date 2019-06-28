@@ -2,7 +2,19 @@
 <html lang="en">
 <head>
   <!-- Theme Made By www.w3schools.com -->
-  <title><%= loginEmail %></title>
+  <title>
+    <%
+      if(loginState) {
+    %>
+        Login State : <%= loginEmail %>
+      <%
+      } else {
+      %>
+        LogOut State : 
+    <%
+      }
+    %>
+  </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -220,7 +232,7 @@
   <p>We specialize in blablabla</p> 
   <form>
     <% 
-      if(loginEmail) { 
+      if(loginState) { 
     %>
         <h1><%= loginEmail %>님 로그인 되었습니다. </h1>
         <button id = 'logout_btn' style = 'color : blue'>Log Out</button>

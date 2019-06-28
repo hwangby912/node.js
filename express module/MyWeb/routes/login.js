@@ -18,7 +18,6 @@ router.post('/', function (req, res, next) {
         res.redirect('/');
         // result.msg = `${req.session.email}님이 로그인 되었습니다. `;
     } else {
-        alert('다시 로그인해주세요. ');
         result.msg = '다시 로그인해주세요. ';
         res.json(JSON.stringify(result));
     }

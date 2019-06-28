@@ -6,7 +6,10 @@ var router = express.Router();
 router.get('/', function (req, res, next) {
   // biz
   // res.render('index', { title: 'Express' });
-  res.render('index', { loginEmail : req.session.email });
+  res.render('index', {
+    loginEmail : req.session.email,
+    loginState : req.session.loginState // 응답
+  });
 });
 
 module.exports = router;

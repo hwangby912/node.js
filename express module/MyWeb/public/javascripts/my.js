@@ -40,6 +40,7 @@ $(document).ready(() => {
         });
     });
 
+    // search_carinfo_template.html search btn listener
     $('#search_btn').click(() => {
         const carNum = $('#carNum').val();
         const select_menu = $('#select_menu').val();
