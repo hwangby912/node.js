@@ -8,11 +8,7 @@ router.post('/', (req, res, next) => {
     req.session.message = req.body.message;
 
     const result = {
-        name : req.body.name,
-        email : req.body.email,
-        phone : req.body.phone,
-        message : req.body.message,
-        txt : `${req.body.name}님이 가입되었습니다. `
+        txt : req.body.name + '님이 가입되었습니다. '
     };
     res.json(JSON.stringify(result));
 });

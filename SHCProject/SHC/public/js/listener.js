@@ -27,15 +27,17 @@ $(document).ready(() => {
         const loginEmail = $('#loginEmail').val();
         const loginPhone = $('#loginPhone').val();
         const loginParams = {
-            loginEmail,
-            loginPhone
+            email : loginEmail,
+            phone : loginPhone
         };
 
         $.post('/login', loginParams, (data, status) => {
             try {
+                alert(JSON.parse(data).txt);
                 $('#loginEmail').val() = "";
-            } catch(err) {
-                location.reload(true);
+                $('#loginPhone').val() = "";
+            } catch (err) {
+                window.location.reload(true);
             }
         });
     });

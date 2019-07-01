@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title></title>
+    <title>
+        <%
+            if(loginState) {
+        %>
+            Login State : <%= loginEmail %>
+            <%
+            } else {
+            %>
+                LogOut State:
+        <%
+            }
+        %>
+    </title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
@@ -67,22 +79,22 @@
         <div align = "center">
             <form>
                 <%
-                if(loginState) {
+                    if(loginState) {
                 %>
-                <h1><%= loginName %>님 환영합니다. </h1>
-                <button id = "logOutBtn" style = 'color : red'>Log Out</button>
+                    <h1><%= loginName %>님 환영합니다. </h1>
+                    <button id = "logOutBtn" style = 'color : red'>Log Out</button>
                 <%
-                } else {
+                    } else {
                 %>
-                <div>
-                    EMAIL<input id = "loginEmail">
-                    PHONE<input id = "loginPhone" type="password">
-                    <p>
-                        <button id = "loginBtn">LogIn</button>
-                    </p>
-                </div>
+                    <div>
+                        EMAIL<input id = "loginEmail">
+                        PHONE<input id = "loginPhone" type="password">
+                        <p>
+                            <button id = "loginBtn">LogIn</button>
+                        </p>
+                    </div>
                 <%
-                }
+                    }
                 %>
             </form>
         </div>
