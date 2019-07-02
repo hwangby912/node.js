@@ -41,4 +41,10 @@ $(document).ready(() => {
             }
         });
     });
+
+    $('#logOutBtn').click(() => {
+        $.get('/logout', (data, status) => {
+            location.reload(true);
+        });
+    });
 });
